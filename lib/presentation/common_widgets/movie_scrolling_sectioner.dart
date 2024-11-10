@@ -1,8 +1,9 @@
 part of 'common_widgets_imports.dart';
 
 class MovieScrollingSectioner extends StatelessWidget {
-  const MovieScrollingSectioner({super.key, required this.row});
+  const MovieScrollingSectioner({super.key, required this.row, required this.rowName});
   final Row row;
+  final String rowName;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class MovieScrollingSectioner extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(10),
           child: Text(
-            "Popular on Netflix",
+            rowName,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,

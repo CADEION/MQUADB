@@ -90,7 +90,7 @@ class _HomeState extends State<Home> {
                             },
                           ),
                         ),
-                        rowName: 'Popular on Netflix',
+                        rowName: 'Popular on QuadB',
                       ),
                       SizedBox(height: .1),
                       MovieScrollingSectioner(

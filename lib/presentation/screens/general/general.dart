@@ -33,17 +33,17 @@ class _GeneralState extends State<General> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      body: pages.elementAt(visit),
+      body:  IndexedStack(index: visit,children: pages,),
       bottomNavigationBar: BottomBarInspiredInside(
               items: items,
-              backgroundColor: Color(0xffFE5F55),
+              backgroundColor: const Color.fromARGB(31, 90, 83, 83).withOpacity(0.4),
               color: Colors.white,
               colorSelected: Colors.white,
               indexSelected: visit,
               onTap: (int index) => setState(() {
                 visit = index;
               }),
-              chipStyle:const ChipStyle(convexBridge: true,background: Color.fromARGB(255, 243, 197, 194)),
+              chipStyle:const ChipStyle(convexBridge: true,background: Colors.red),
               itemStyle: ItemStyle.circle,
               animated: true,
             ),

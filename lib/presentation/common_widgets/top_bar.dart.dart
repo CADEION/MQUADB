@@ -43,11 +43,32 @@ class TopBar extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Icon(Icons.cast_outlined,color: Colors.white,),
-                      SizedBox(width: 30,),
-                      Icon(Icons.search,color: Colors.white,),
-                      SizedBox(width: 30,),
-                      Icon(Icons.person,color: Colors.white,),
+                      Icon(
+                        Icons.cast_outlined,
+                        color: Colors.white,
+                      ),
+                      SizedBox(
+                        width: 30,
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Search()));
+                        },
+                        icon: Icon(
+                          Icons.search,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 30,
+                      ),
+                      Icon(
+                        Icons.person,
+                        color: Colors.white,
+                      ),
                       SizedBox(
                         width: 10,
                       ),
@@ -62,9 +83,21 @@ class TopBar extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text("TV Shows",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-                Text("Movies",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-                Text("Categories",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                Text(
+                  "TV Shows",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  "Movies",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  "Categories",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
               ],
             ),
           ],

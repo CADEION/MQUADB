@@ -53,9 +53,9 @@ class SpecialMovie extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: const [
-                          Icon(Icons.add),
+                          Icon(Icons.add,color: Colors.white,),
                           SizedBox(height: 2),
-                          Text("My List"),
+                          Text("My List",style: TextStyle(color: Colors.white,),),
                         ],
                       ),
                       Container(
@@ -81,9 +81,9 @@ class SpecialMovie extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: const [
-                          Icon(Icons.info_outline),
+                          Icon(Icons.info_outline,color: Colors.white,),
                           SizedBox(height: 2),
-                          Text("Info"),
+                          Text("Info",style: TextStyle(color: Colors.white,),),
                         ],
                       ),
                     ],

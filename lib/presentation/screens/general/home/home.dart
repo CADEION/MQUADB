@@ -1,7 +1,5 @@
 part of 'home_imports.dart';
 
-
-
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -9,18 +7,23 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   bool _showTobBar = true, _flag = true;
-  late ScrollController controller ;
+  late ScrollController controller;
+  late HomeViewModel homeViewModel;
 
   @override
   void initState() {
+    homeViewModel = HomeViewModel(repositories: context.read<Repositories>());
+    homeViewModel.fetchAllPosts();
+
     super.initState();
     controller = ScrollController();
-      controller.addListener(() {
-        _flag = controller.position.userScrollDirection == ScrollDirection.forward;
+    controller.addListener(() {
+      _flag =
+          controller.position.userScrollDirection == ScrollDirection.forward;
 
-        if (_showTobBar != _flag) setState(() {});
-        _showTobBar = _flag;
-      });
+      if (_showTobBar != _flag) setState(() {});
+      _showTobBar = _flag;
+    });
   }
 
   @override
@@ -80,49 +83,19 @@ class _HomeState extends State<Home> {
         ),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          padding: EdgeInsets.symmetric(horizontal: 10),
+          padding: EdgeInsets.symmetric(horizontal: 1),
           physics: BouncingScrollPhysics(),
           child: Row(
-            children: [
-              MovieCard(
-                image:AssetImage(MyAssets.assetsImagesJoker),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              MovieCard(
+            children: List.generate(
+            6,
+            (index) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 3.0),
+              child: MovieCard(
                 image: AssetImage(MyAssets.assetsImagesJoker),
               ),
-              SizedBox(
-                width: 10,
-              ),
-              MovieCard(
-                image: AssetImage(MyAssets.assetsImagesJoker),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              MovieCard(
-                image: AssetImage(MyAssets.assetsImagesJoker),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              MovieCard(
-                image: AssetImage(MyAssets.assetsImagesJoker),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              MovieCard(
-                image: AssetImage(MyAssets.assetsImagesJoker),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-            ],
+            ),
+          ),)
           ),
-        ),
       ],
     );
   }
@@ -148,7 +121,7 @@ class _HomeState extends State<Home> {
           child: Row(
             children: [
               MovieCard(
-                image:AssetImage(MyAssets.assetsImagesJoker),
+                image: AssetImage(MyAssets.assetsImagesJoker),
               ),
               SizedBox(
                 width: 10,
@@ -223,12 +196,6 @@ class _HomeState extends State<Home> {
                 width: 10,
               ),
               MovieCard(
-                image:AssetImage(MyAssets.assetsImagesJoker),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              MovieCard(
                 image: AssetImage(MyAssets.assetsImagesJoker),
               ),
               SizedBox(
@@ -241,7 +208,13 @@ class _HomeState extends State<Home> {
                 width: 10,
               ),
               MovieCard(
-                image:AssetImage(MyAssets.assetsImagesJoker),
+                image: AssetImage(MyAssets.assetsImagesJoker),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              MovieCard(
+                image: AssetImage(MyAssets.assetsImagesJoker),
               ),
               SizedBox(
                 width: 10,
@@ -252,5 +225,4 @@ class _HomeState extends State<Home> {
       ],
     );
   }
-
 }

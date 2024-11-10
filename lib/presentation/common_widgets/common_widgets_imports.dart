@@ -8,3 +8,4 @@ import '../../core/constants/my_assets.dart';
 part 'top_bar.dart.dart';
 part 'special_movie.dart';
 part 'movie_card.dart';
+part 'movie_scrolling_sectioner.dart';

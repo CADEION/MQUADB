@@ -15,7 +15,7 @@ class MovieCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(6),
         image: DecorationImage(
-          image:AssetImage(MyAssets.assetsImagesJoker), // Hardcoded asset image
+          image:image, // Hardcoded asset image
           fit: BoxFit.cover,
         ),
       ),

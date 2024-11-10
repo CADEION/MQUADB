@@ -41,9 +41,59 @@ class _HomeState extends State<Home> {
                   image: 'assets/images/joker.jpg',
                 ),
                 SizedBox(height: .1),
-                loadPopularOnNetflix(),
-                SizedBox(height: .1),
-                loadTrendingNow(),
+                BlocBuilder<VelocityBloc<List<HomeModel>>,
+                    VelocityState<List<HomeModel>>>(
+                  bloc: homeViewModel.homeModelBloc,
+                  builder: (context, state) {
+                    if (state is VelocityInitialState) {
+                      return Center(
+                        child: CircularProgressIndicator.adaptive(),
+                      );
+                    } else if (state is VelocityUpdateState) {
+                      return MovieScrollingSectioner(
+                        row: Row(
+                          children: List.generate(
+                            state.data.length,
+                            (index) {
+                              final homeModel = state.data[index];
+                              final show = homeModel.show;
+                              if (show != null &&
+                                  show.image != null &&
+                                  show.image!.medium != null) {
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 3.0),
+                                  child: Column(
+                                    children: [
+                                      MovieCard(
+                                        image:
+                                            NetworkImage(show.image!.medium!),
+                                      ),
+                                      show.id?.toString().text.make() ??
+                                          SizedBox.shrink(),
+                                    ],
+                                  ),
+                                );
+                              } else {
+                                // Handle the case where `show` or its properties are null
+                                return SizedBox.shrink();
+                              }
+                            },
+                          ),
+                        ),
+                      );
+                    } else if (state is VelocityFailedState) {
+                      return Center(
+                        child: state.error.text.make(),
+                      );
+                    }
+                    return SizedBox(
+                      child: 'Data'.text.make(),
+                    );
+                  },
+                ),
+                // SizedBox(height: .1),
+                // loadTrendingNow(),
                 SizedBox(height: .1),
                 loadNewReleases(),
                 SizedBox(height: .1),
@@ -67,101 +117,84 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget loadPopularOnNetflix() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(10),
-          child: Text(
-            "Popular on Netflix",
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
+  Widget loadTrendingNow() {
+    return MovieScrollingSectioner(
+      row: Row(
+        children: List.generate(
+          6,
+          (index) => Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 3.0),
+            child: MovieCard(
+              image: AssetImage(MyAssets.assetsImagesJoker),
             ),
           ),
         ),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          padding: EdgeInsets.symmetric(horizontal: 1),
-          physics: BouncingScrollPhysics(),
-          child: Row(
-            children: List.generate(
-            6,
-            (index) => Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 3.0),
-              child: MovieCard(
-                image: AssetImage(MyAssets.assetsImagesJoker),
-              ),
-            ),
-          ),)
-          ),
-      ],
+      ),
     );
   }
 
-  Widget loadTrendingNow() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Text(
-            "Trending Now",
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          padding: EdgeInsets.symmetric(horizontal: 10),
-          physics: BouncingScrollPhysics(),
-          child: Row(
-            children: [
-              MovieCard(
-                image: AssetImage(MyAssets.assetsImagesJoker),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              MovieCard(
-                image: AssetImage(MyAssets.assetsImagesJoker),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              MovieCard(
-                image: AssetImage(MyAssets.assetsImagesJoker),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              MovieCard(
-                image: AssetImage(MyAssets.assetsImagesJoker),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              MovieCard(
-                image: AssetImage(MyAssets.assetsImagesJoker),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              MovieCard(
-                image: AssetImage(MyAssets.assetsImagesJoker),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
+  // Widget loadTrendingNow() {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: [
+  //       Padding(
+  //         padding: const EdgeInsets.all(10.0),
+  //         child: Text(
+  //           "Trending Now",
+  //           style: TextStyle(
+  //             fontSize: 16,
+  //             fontWeight: FontWeight.w500,
+  //           ),
+  //         ),
+  //       ),
+  //       SingleChildScrollView(
+  //         scrollDirection: Axis.horizontal,
+  //         padding: EdgeInsets.symmetric(horizontal: 10),
+  //         physics: BouncingScrollPhysics(),
+  //         child: Row(
+  //           children: [
+  //             MovieCard(
+  //               image: AssetImage(MyAssets.assetsImagesJoker),
+  //             ),
+  //             SizedBox(
+  //               width: 10,
+  //             ),
+  //             MovieCard(
+  //               image: AssetImage(MyAssets.assetsImagesJoker),
+  //             ),
+  //             SizedBox(
+  //               width: 10,
+  //             ),
+  //             MovieCard(
+  //               image: AssetImage(MyAssets.assetsImagesJoker),
+  //             ),
+  //             SizedBox(
+  //               width: 10,
+  //             ),
+  //             MovieCard(
+  //               image: AssetImage(MyAssets.assetsImagesJoker),
+  //             ),
+  //             SizedBox(
+  //               width: 10,
+  //             ),
+  //             MovieCard(
+  //               image: AssetImage(MyAssets.assetsImagesJoker),
+  //             ),
+  //             SizedBox(
+  //               width: 10,
+  //             ),
+  //             MovieCard(
+  //               image: AssetImage(MyAssets.assetsImagesJoker),
+  //             ),
+  //             SizedBox(
+  //               width: 10,
+  //             ),
+  //           ],
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 
   Widget loadNewReleases() {
     return Column(

@@ -26,3 +26,23 @@ class HomeViewModel{
 
   
 }
+
+
+// MovieScrollingSectioner(
+//                                   row: Row(
+//                                     children: List.generate(
+//                                       state.data.length,
+//                                       (index) => Padding(
+//                                         padding: const EdgeInsets.symmetric(horizontal: 3.0),
+//                                         child: Column(
+//                                           children: [
+//                                             MovieCard(
+//                                               image:NetworkImage(state.data[index].show!.image!.medium.toString() ),
+//                                             ),
+//                                             state.data[index].show!.id.toString().text.make()
+//                                           ],
+//                                         ),
+//                                       ),
+//                                     ),
+//                                   ),
+//                                 );
